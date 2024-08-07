@@ -1,4 +1,4 @@
-package com.cbr.productservice.dto;
+package com.cbr.productservice.dtos;
 
 import lombok.Getter;
 import lombok.Setter;

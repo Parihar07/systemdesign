@@ -3,6 +3,8 @@ package com.cbr.productservice.controller;
 import com.cbr.productservice.models.Product;
 import com.cbr.productservice.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -22,37 +24,40 @@ public class ProductController {
 
     @GetMapping()
     public List<Product> getAllProducts() {
-        return new ArrayList<>();
+        List<Product> allProducts = productService.getAllProducts();
+        return allProducts;
     }
 
     @GetMapping("/{id}")
-    public Product getSingleProduct(@PathVariable("id") Long id) {
-        return productService.getSingleProduct(id);
+    public ResponseEntity<Product> getSingleProduct(@PathVariable("id") Long id) {
+        try {
+            return new ResponseEntity<>(productService.getSingleProduct(id), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping()
     public Product addNewProduct(@RequestBody Product product) {
-        Product p =  new Product();
-        p.setTitle("ZingoBall");
-        return new Product();
+        Product p;
+        p = new Product();
+        return p;
     }
 
 
     @PatchMapping("/{id}")
     public Product updateProduct(@PathVariable("id") Long id, @RequestBody Product product) {
-        return new Product();
+        return productService.updateProduct(id, product);
     }
 
     @PutMapping("/{id}")
-    public Product replaceProduct(@PathVariable("id") Long id, @RequestBody Product product)
-    {
-        return new Product();
+    public Product replaceProduct(@PathVariable("id") Long id, @RequestBody Product product)    {
+       return productService.replaceProduct(id, product);
     }
 
     @DeleteMapping("/{id}")
-    public Product deleteProduct(@PathVariable("id") Long Id)
-    {
-        return new Product();
+    public Product deleteProduct(@PathVariable("id") Long Id)    {
+        return productService.deleteProduct(Id);
     }
 
 }

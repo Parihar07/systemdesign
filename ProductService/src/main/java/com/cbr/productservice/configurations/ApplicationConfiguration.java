@@ -1,4 +1,4 @@
-package com.cbr.productservice.Configuration;
+package com.cbr.productservice.configurations;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
