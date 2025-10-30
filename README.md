@@ -35,6 +35,31 @@ Complete guide to C++ access control mechanisms.
 
 ---
 
+#### 2. [Constructors & Destructors](./constructors/)
+Deep dive into object lifecycle management in C++.
+
+**Covers:**
+- Default, Parameterized, and Copy Constructors
+- Shallow vs Deep Copy (critical for interviews!)
+- Constructor Overloading
+- Initialization Lists
+- Destructors and RAII
+- Rule of Three/Five
+- Memory management with dynamic allocation
+- Constructor calling rules and delegation
+
+**Includes Comprehensive Examples:**
+- `01_basic_constructor.cpp` - Constructor fundamentals
+- `02_parameterized_constructor.cpp` - Controlled object creation
+- `03_copy_constructor.cpp` - Shallow vs Deep copy explained
+- `cnstrs.cpp` - Working example with Rule of Three
+
+**Status:** Parts 1-3 complete ✅ | Parts 4-10 coming soon
+
+📖 [Read the full guide →](./constructors/README.md)
+
+---
+
 ## 🗂️ Repository Structure
 
 ```
@@ -46,6 +71,12 @@ systemdesign/
 │   ├── example2/               # Protected rules
 │   ├── example3/               # Real-world scenarios
 │   └── example4/               # Inheritance types
+├── constructors/                # Constructors & Destructors
+│   ├── README.md               # Complete roadmap
+│   ├── 01_basic_constructor.cpp
+│   ├── 02_parameterized_constructor.cpp
+│   ├── 03_copy_constructor.cpp
+│   └── cnstrs.cpp              # Working example
 ├── ProductService/              # Java Spring Boot project (for practice)
 └── backendproject/              # Other practice projects
 ```
@@ -72,6 +103,11 @@ g++ -o am.out am.cpp
 
 # Run
 ./am.out
+
+# Or for constructors
+cd constructors
+g++ -o basic.out 01_basic_constructor.cpp
+./basic.out
 ```
 
 Refer to individual README files for specific compilation instructions.
@@ -87,7 +123,9 @@ Refer to individual README files for specific compilation instructions.
 4. **Practice system design**: Design real-world systems
 
 ### Recommended Order:
-- ✅ Access Modifiers (Available now)
+- ✅ Access Modifiers (Complete)
+- ✅ Constructors & Destructors (Parts 1-3 complete)
+- 🔜 Constructor Overloading & Initialization Lists
 - 🔜 Const Correctness
 - 🔜 Virtual Functions & Polymorphism
 - 🔜 RAII & Smart Pointers
