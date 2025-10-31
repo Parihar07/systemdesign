@@ -54,9 +54,9 @@ Deep dive into object lifecycle management in C++.
 - `03_copy_constructor.cpp` - Shallow vs Deep copy explained
 - `cnstrs.cpp` - Working example with Rule of Three
 
-**Status:** Parts 1-3 complete ✅ | Parts 4-10 coming soon
+**Status:** Parts 1-7 complete ✅ | Parts 8-10 coming soon
 
-📖 [Read the full guide →](./constructors/README.md)
+📖 [Read the full guide →](./constructors-destructors/README.md)
 
 ---
 
@@ -71,13 +71,19 @@ systemdesign/
 │   ├── example2/               # Protected rules
 │   ├── example3/               # Real-world scenarios
 │   └── example4/               # Inheritance types
-├── constructors/                # Constructors & Destructors
+├── constructors-destructors/    # Constructors & Destructors
 │   ├── README.md               # Complete roadmap
 │   ├── 01_basic_constructor.cpp
 │   ├── 02_parameterized_constructor.cpp
 │   ├── 03_copy_constructor.cpp
+│   ├── 04_constructor_overloading.cpp
+│   ├── 05_initialization_list.cpp
+│   ├── 06_destructor_basics.cpp
+│   ├── 07_constructor_destructor_order.cpp
 │   └── cnstrs.cpp              # Working example
 ├── ProductService/              # Java Spring Boot project (for practice)
+└── backendproject/              # Other practice projects
+```
 └── backendproject/              # Other practice projects
 ```
 
