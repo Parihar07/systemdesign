@@ -136,10 +136,10 @@ Refer to individual README files for specific compilation instructions.
 
 ### Recommended Order:
 - ✅ Access Modifiers (Complete)
-- ✅ Constructors & Destructors (Parts 1-3 complete)
-- 🔜 Constructor Overloading & Initialization Lists
+- ✅ Constructors & Destructors (Parts 1-8 complete - Core topics done!)
+- 🔜 Inheritance & Polymorphism
+- 🔜 Virtual Functions & Abstract Classes
 - 🔜 Const Correctness
-- 🔜 Virtual Functions & Polymorphism
 - 🔜 RAII & Smart Pointers
 - 🔜 Move Semantics
 - 🔜 Design Patterns
