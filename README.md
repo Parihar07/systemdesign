@@ -52,9 +52,14 @@ Deep dive into object lifecycle management in C++.
 - `01_basic_constructor.cpp` - Constructor fundamentals
 - `02_parameterized_constructor.cpp` - Controlled object creation
 - `03_copy_constructor.cpp` - Shallow vs Deep copy explained
+ - `04_constructor_overloading.cpp` - Function overloading with 4 examples
+- `05_initialization_list.cpp` - Performance optimization
+- `06_destructor_basics.cpp` - Resource cleanup & RAII
+- `07_constructor_destructor_order.cpp` - Inheritance order & virtual destructors
+- `08_special_cases.cpp` - Explicit, Singleton, Factory patterns
 - `cnstrs.cpp` - Working example with Rule of Three
 
-**Status:** Parts 1-7 complete ✅ | Parts 8-10 coming soon
+**Status:** Parts 1-8 complete ✅ **CORE TOPICS DONE!**
 
 📖 [Read the full guide →](./constructors-destructors/README.md)
 
@@ -80,6 +85,7 @@ systemdesign/
 │   ├── 05_initialization_list.cpp
 │   ├── 06_destructor_basics.cpp
 │   ├── 07_constructor_destructor_order.cpp
+│   ├── 08_special_cases.cpp
 │   └── cnstrs.cpp              # Working example
 ├── ProductService/              # Java Spring Boot project (for practice)
 └── backendproject/              # Other practice projects
