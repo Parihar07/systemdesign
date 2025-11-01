@@ -65,6 +65,26 @@ Deep dive into object lifecycle management in C++.
 
 ---
 
+#### 3. [Inheritance](./inheritance/)
+Understanding class hierarchies and code reuse through inheritance.
+
+**Covers:**
+- Inheritance basics (IS-A relationship)
+- Types of inheritance (Single, Multiple, Multilevel, Hierarchical, Hybrid)
+- Access control in inheritance
+- Constructor/Destructor order in inheritance
+- Function overriding
+- Virtual functions and polymorphism
+
+**Includes Examples:**
+- `01_inheritance_basics.cpp` - Fundamental inheritance concepts
+
+**Status:** Part 1 in progress 🔄
+
+📖 [Read the full guide →](./inheritance/README.md)
+
+---
+
 ## 🗂️ Repository Structure
 
 ```
@@ -87,6 +107,9 @@ systemdesign/
 │   ├── 07_constructor_destructor_order.cpp
 │   ├── 08_special_cases.cpp
 │   └── cnstrs.cpp              # Working example
+├── inheritance/                 # Inheritance & Polymorphism
+│   ├── README.md               # Complete roadmap
+│   └── 01_inheritance_basics.cpp
 ├── ProductService/              # Java Spring Boot project (for practice)
 └── backendproject/              # Other practice projects
 ```
