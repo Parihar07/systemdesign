@@ -725,3 +725,120 @@ We'll explore:
 - Common pitfalls and how to avoid them
 
 Ready to dive in? Let's start with **Part 1: Inheritance Basics**! 🚀
+
+---
+
+### **Part 6.1: Deep Dive - The `vptr` and `vtable` Visual Map**
+
+This is the internal mechanism that makes runtime polymorphism possible. Once you understand this, you'll never forget how `virtual` functions work.
+
+#### **The Core Concepts**
+
+1.  **`vtable` (Virtual Table):**
+    *   **What:** A static array of function pointers.
+    *   **Who:** **One `vtable` exists per class** that has at least one virtual function.
+    *   **When:** Created at **compile time**.
+    *   **Where:** Stored in a read-only segment of memory. All objects of the same class share this single `vtable`.
+
+2.  **`vptr` (Virtual Pointer):**
+    *   **What:** A hidden pointer. It's a member variable secretly added by the compiler.
+    *   **Who:** **One `vptr` exists per object** of a class with virtual functions.
+    *   **When:** The `vptr` is initialized during **object construction** (in the constructor).
+    *   **Job:** To point to the correct `vtable` for that object's class.
+
+#### **Visualizing the Memory Layout**
+
+Let's use these classes:
+
+```cpp
+class Shape {
+public:
+    virtual void draw();
+    virtual void rotate();
+    // vptr is added here by the compiler
+};
+
+class Circle : public Shape {
+public:
+    void draw() override; // Overrides Shape::draw
+    // rotate() is inherited from Shape
+};
+```
+
+**At Compile Time:** The compiler builds the `vtable`s.
+
+**Shape's vtable:**
+*   `[0]` -> `&Shape::draw()`
+*   `[1]` -> `&Shape::rotate()`
+
+**Circle's vtable:**
+*   `[0]` -> `&Circle::draw()`  *(Overridden)*
+*   `[1]` -> `&Shape::rotate()` *(Inherited)*
+
+
+**At Runtime:** When you create an object, it gets its `vptr`.
+
+```cpp
+Shape* s = new Circle();
+```
+
+This is what happens in memory:
+```
+// In the HEAP
+Circle Object (at address 0x1000)
+  - vptr ---------------------> // In READ-ONLY MEMORY
+  - (other data members...)      // Circle's vtable
+                                 //   [0]: &Circle::draw()
+                                 //   [1]: &Shape::rotate()
+```
+The object's `vptr` is set to point to the `vtable` of its **actual type** (`Circle`).
+
+#### **The Magic: Step-by-Step Virtual Function Call**
+
+When the code `s->draw();` is executed:
+
+1.  **Follow the `vptr`:** The program first looks inside the object `s` points to. It finds the hidden `vptr`.
+    `[Circle Object] -> vptr`
+
+2.  **Go to the `vtable`:** It follows the `vptr` to the `Circle`'s `vtable`.
+    `vptr -> [Circle's vtable]`
+
+3.  **Look up the Function:** The compiler knows `draw()` is the first virtual function (at index `[0]`). It looks up the address at `vtable[0]`.
+    `[Circle's vtable] -> [0] -> &Circle::draw()`
+
+4.  **Call the Function:** The program calls the function at that address. In this case, it's `Circle::draw()`.
+
+This is **Dynamic Dispatch**. The decision of which `draw()` to call is made at **RUNTIME**, based on the actual type of the object, not the type of the pointer.
+
+#### **What if the function is NOT virtual?**
+
+If you call a non-virtual function, like `s->regularFunc();`:
+
+1.  **Check Pointer Type:** The compiler sees that `s` is a `Shape*`.
+2.  **Direct Call:** It generates a direct, hard-coded call to `Shape::regularFunc()`.
+3.  **No `vptr`/`vtable` is ever used.** This is **Static Dispatch**.
+
+#### **Summary: The Unforgettable Map**
+
+```
+// OBJECTS (in RAM/Heap)                // VTABLES (in Read-Only Memory)
+
+Circle obj1:
+  vptr ----------------------------> Circle's vtable:
+                                        - &Circle::draw()
+Circle obj2:                            - &Shape::rotate()
+  vptr --------------------|
+                           |
+Rectangle obj1:            |
+  vptr --------------------|------> Rectangle's vtable:
+                                        - &Rectangle::draw()
+                                        - &Rectangle::rotate()
+
+// Key Takeaways:
+// 1. Each OBJECT has its OWN vptr.
+// 2. All objects of the SAME CLASS share ONE vtable.
+// 3. The call `obj->draw()` means:
+//    "Follow my vptr, find the draw() entry, and call that function."
+```
+
+This map shows that no matter how many `Circle` objects you create, they all share **one** `vtable`, but each has its **own** `vptr` to find it. This is the elegant and efficient solution C++ uses for runtime polymorphism.
