@@ -66,20 +66,36 @@ Deep dive into object lifecycle management in C++.
 ---
 
 #### 3. [Inheritance](./inheritance/)
-Understanding class hierarchies and code reuse through inheritance.
+Complete guide to class hierarchies, polymorphism, and runtime dispatch in C++.
 
 **Covers:**
 - Inheritance basics (IS-A relationship)
 - Types of inheritance (Single, Multiple, Multilevel, Hierarchical, Hybrid)
-- Access control in inheritance
+- Access control in inheritance (public, protected, private)
 - Constructor/Destructor order in inheritance
-- Function overriding
-- Virtual functions and polymorphism
+- Function overriding and virtual functions
+- Polymorphism and dynamic dispatch
+- Abstract classes and pure virtual functions
+- Diamond problem and virtual inheritance
+- **vptr/vtable mechanism deep dive** (system-level understanding)
+- Real-world examples (GUI toolkit, device drivers)
+- Interview questions and best practices
 
-**Includes Examples:**
-- `01_inheritance_basics.cpp` - Fundamental inheritance concepts
+**Includes 10 Complete Examples:**
+- `01_inheritance_basics.cpp` - Fundamental concepts
+- `02_types_of_inheritance.cpp` - All inheritance types
+- `03_access_control.cpp` - Access specifier rules
+- `04_constructor_destructor_order.cpp` - Object lifecycle
+- `05_function_overriding.cpp` - Method overriding
+- `06_virtual_functions.cpp` - Polymorphism basics
+- `07_abstract_classes.cpp` - Pure virtual functions
+- `08_multiple_inheritance.cpp` - Multiple base classes
+- `09_real_world_example.cpp` - GUI toolkit demo
+- `10_private_inheritance_example.cpp` - Advanced patterns
+- `vptr_vtable_visual.cpp` - Internal mechanism visualization
+- `diamondprob.cpp` - Diamond problem solution
 
-**Status:** Part 1 in progress 🔄
+**Status:** All 10 parts complete ✅ **FULLY DOCUMENTED!**
 
 📖 [Read the full guide →](./inheritance/README.md)
 
@@ -108,8 +124,19 @@ systemdesign/
 │   ├── 08_special_cases.cpp
 │   └── cnstrs.cpp              # Working example
 ├── inheritance/                 # Inheritance & Polymorphism
-│   ├── README.md               # Complete roadmap
-│   └── 01_inheritance_basics.cpp
+│   ├── README.md               # Complete roadmap with navigation
+│   ├── 01_inheritance_basics.cpp
+│   ├── 02_types_of_inheritance.cpp
+│   ├── 03_access_control.cpp
+│   ├── 04_constructor_destructor_order.cpp
+│   ├── 05_function_overriding.cpp
+│   ├── 06_virtual_functions.cpp
+│   ├── 07_abstract_classes.cpp
+│   ├── 08_multiple_inheritance.cpp
+│   ├── 09_real_world_example.cpp
+│   ├── 10_private_inheritance_example.cpp
+│   ├── vptr_vtable_visual.cpp
+│   └── diamondprob.cpp
 ├── ProductService/              # Java Spring Boot project (for practice)
 └── backendproject/              # Other practice projects
 ```
@@ -159,13 +186,13 @@ Refer to individual README files for specific compilation instructions.
 
 ### Recommended Order:
 - ✅ Access Modifiers (Complete)
-- ✅ Constructors & Destructors (Parts 1-8 complete - Core topics done!)
-- 🔜 Inheritance & Polymorphism
-- 🔜 Virtual Functions & Abstract Classes
-- 🔜 Const Correctness
+- ✅ Constructors & Destructors (Complete - All 8 parts done!)
+- ✅ Inheritance & Polymorphism (Complete - All 10 parts done!)
+- 🔜 Templates & Generic Programming
 - 🔜 RAII & Smart Pointers
-- 🔜 Move Semantics
+- 🔜 Move Semantics & Perfect Forwarding
 - 🔜 Design Patterns
+- 🔜 Exception Handling
 - 🔜 System Design Case Studies
 
 ---
@@ -211,16 +238,17 @@ This is a living resource that will grow over time. Topics will be added gradual
 
 ### ✅ Completed
 - [x] Access Modifiers (public, protected, private, friend)
+- [x] Constructors & Destructors (All 8 parts)
+- [x] Inheritance & Polymorphism (All 10 parts + vptr/vtable deep dive)
 
-### 🔄 In Progress
-- [ ] Const Correctness (const, constexpr, mutable)
+### � In Progress
+- [ ] Templates & Generic Programming
 
 ### 📋 Planned
-- [ ] Virtual Functions & Polymorphism
 - [ ] RAII & Resource Management
 - [ ] Smart Pointers (unique_ptr, shared_ptr, weak_ptr)
 - [ ] Move Semantics & Perfect Forwarding
-- [ ] Templates & Generic Programming
+- [ ] STL Containers & Algorithms
 - [ ] Design Patterns (Gang of Four)
 - [ ] Exception Handling
 - [ ] Memory Management
