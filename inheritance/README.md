@@ -1,10 +1,31 @@
 # Inheritance - Interview Preparation
 
-## 🔗 Quick Links
+## � Table of Contents
+
+### Core Topics (10 Parts)
+1. [Part 1: Inheritance Basics](#part-1-inheritance-basics-) 
+2. [Part 2: Types of Inheritance](#part-2-types-of-inheritance-)
+3. [Part 3: Access Control in Inheritance](#part-3-access-control-in-inheritance-)
+4. [Part 4: Constructor & Destructor in Inheritance](#part-4-constructor--destructor-in-inheritance-)
+5. [Part 5: Function Overriding](#part-5-function-overriding-)
+6. [Part 6: Virtual Functions & Polymorphism](#part-6-virtual-functions--polymorphism-)
+7. [Part 7: Abstract Classes & Interfaces](#part-7-abstract-classes--interfaces-)
+8. [Part 8: Multiple Inheritance & Diamond Problem](#part-8-multiple-inheritance--diamond-problem-)
+9. [Part 9: Real-World Examples](#part-9-real-world-examples-)
+10. [Part 10: Interview Questions](#part-10-interview-questions-)
+
+### Deep Dive Sections
+- [Part 6.1: The vptr and vtable Visual Map](#part-61-deep-dive---the-vptr-and-vtable-visual-map) - Internal mechanism of polymorphism
+- [Real-World Example: GUI Toolkit](#-real-world-example-deep-dive-gui-toolkit) - Complete working example
+
+### Extra Knowledge
+- [Private Inheritance vs Final Keyword](#private-inheritance-vs-final-keyword) - Common confusion clarified
 - [How to Identify When to Use Inheritance](#how-to-identify-when-to-use-inheritance) - IS-A test and decision tree
 - [Understanding Object Creation in Inheritance](#understanding-object-creation-in-inheritance) - Memory layout explained
-- [Constructor/Destructor Order in Inheritance](#constructor-destructor-order) - From constructors-destructors topic
+- [Constructor/Destructor Order](#constructor-destructor-order) - From constructors-destructors topic
 - [Types of Inheritance](#types-of-inheritance) - Single, Multiple, Multilevel, Hierarchical, Hybrid
+
+---
 
 ## 📚 Topics Covered
 
@@ -53,32 +74,95 @@
 - Runtime polymorphism
 - File: [`06_virtual_functions.cpp`](./06_virtual_functions.cpp)
 
-### Part 7: Abstract Classes & Interfaces
+### Part 7: Abstract Classes & Interfaces ✅
 - Pure virtual functions
 - Abstract classes (cannot instantiate)
 - Interfaces in C++
 - Real-world examples
 - File: [`07_abstract_classes.cpp`](./07_abstract_classes.cpp)
 
-### Part 8: Multiple Inheritance & Diamond Problem
+### Part 8: Multiple Inheritance & Diamond Problem ✅
 - Multiple inheritance challenges
 - Diamond problem
 - Virtual inheritance (solution)
 - Real-world use cases
 - File: [`08_multiple_inheritance.cpp`](./08_multiple_inheritance.cpp)
 
-### Part 9: Real-World Examples
-- Employee hierarchy
-- Shape hierarchy
-- File system hierarchy
-- Animal classification
-- File: [`09_realworld_examples.cpp`](./09_realworld_examples.cpp)
+### Part 9: Real-World Examples ✅
+- GUI Toolkit Example (UIWidget, Button, TextField)
+- Demonstrates polymorphic rendering engine
+- Shows extensibility through inheritance
+- File: [`09_real_world_example.cpp`](./09_real_world_example.cpp)
 
-### Part 10: Interview Questions
-- Common inheritance questions
-- Tricky scenarios
-- Best practices
-- File: [`10_interview_questions.cpp`](./10_interview_questions.cpp)
+### Part 10: Interview Questions ✅
+- Diamond Problem and virtual inheritance
+- Virtual destructors and memory leaks
+- Static vs Dynamic dispatch (vptr/vtable)
+- Private inheritance vs Composition
+- Abstract classes and API contracts
+- See the [Deep Dive Sections](#deep-dive-sections) and [Extra Knowledge](#extra-knowledge) sections above
+
+---
+
+## 💡 Real-World Example Deep Dive: GUI Toolkit
+
+This is a classic example of using polymorphism to build an extensible system.
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <string>
+
+// 1. The Abstract Contract (The Interface)
+class UIWidget {
+public:
+    virtual void draw() const = 0; // All widgets must be drawable
+    virtual ~UIWidget() = default;
+};
+
+// 2. Concrete Implementations
+class Button : public UIWidget {
+private:
+    std::string m_label;
+public:
+    Button(const std::string& label) : m_label(label) {}
+    void draw() const override {
+        std::cout << "Drawing a Button: [" << m_label << "]" << std::endl;
+    }
+};
+
+class TextField : public UIWidget {
+private:
+    std::string m_text;
+public:
+    TextField(const std::string& text = "") : m_text(text) {}
+    void draw() const override {
+        std::cout << "Drawing a TextField: |" << m_text << "|" << std::endl;
+    }
+};
+
+// 3. The Rendering Engine (The System)
+// This function is completely decoupled from the concrete widgets.
+void render(const std::vector<UIWidget*>& widgets) {
+    std::cout << "\n--- SCREEN REFRESH ---" << std::endl;
+    for (const auto* widget : widgets) {
+        widget->draw(); // Dynamic dispatch happens here
+    }
+    std::cout << "----------------------" << std::endl;
+}
+
+int main() {
+    Button ok_button("OK");
+    TextField name_field("Enter name");
+
+    // The rendering engine works with a list of base class pointers.
+    std::vector<UIWidget*> widget_list = {&ok_button, &name_field};
+    render(widget_list);
+    return 0;
+}
+```
+
+**System-Level Takeaway:** The `render` function represents a stable, core part of a larger system. It can handle any `UIWidget` without ever needing to be modified. This is achieved by programming to an interface (`UIWidget`) rather than an implementation (`Button`, `TextField`).
 
 ---
 
@@ -161,69 +245,7 @@ class String final {
 // C# example: public sealed class String
 ```
 
-**Interview Tip:** If asked "How to prevent inheritance?" → Answer: `final` keyword (C++11)  
-If asked "What does private inheritance do?" → Answer: Hides base interface, but doesn't prevent inheritance
-
----
-
-## 🎯 Interview Key Points to Remember
-
-### Inheritance:
-- [ ] **IS-A relationship** - Derived class "is a type of" Base class
-- [ ] **Code reuse** - Inherit common functionality
-- [ ] **Extensibility** - Add new features without modifying base
-- [ ] **Polymorphism** - Base class pointer → Derived class object
-- [ ] **Access specifiers** - public, protected, private inheritance
-
-### Constructor/Destructor Order:
-- [ ] **Construction:** Base → Derived (top-down)
-- [ ] **Destruction:** Derived → Base (bottom-up, reverse)
-- [ ] **Virtual destructor** - MUST have in base class if using inheritance
-- [ ] **Base constructor call** - Use initialization list in derived class
-
-### Types of Inheritance:
-- [ ] **Single** - One base, one derived
-- [ ] **Multiple** - Multiple bases, one derived (Diamond problem!)
-- [ ] **Multilevel** - Chain: A → B → C
-- [ ] **Hierarchical** - One base, multiple derived
-- [ ] **Hybrid** - Combination of above
-
-### Virtual Functions:
-- [ ] **Runtime polymorphism** - Function call resolved at runtime
-- [ ] **Virtual keyword** - Makes function overridable
-- [ ] **Pure virtual** - `virtual void func() = 0;` (abstract)
-- [ ] **vtable** - Virtual function table (how it works internally)
-- [ ] **Override keyword** - C++11, explicit override (recommended)
-
----
-
-## 🚀 Progress Tracker
-- [x] Part 1: Inheritance Basics ✅
-- [x] Part 2: Types of Inheritance ✅
-- [ ] Part 3: Access Control
-- [ ] Part 4: Constructor/Destructor Order
-- [ ] Part 5: Function Overriding
-- [ ] Part 6: Virtual Functions
-- [ ] Part 7: Abstract Classes
-- [ ] Part 8: Multiple Inheritance
-- [ ] Part 9: Real-World Examples
-- [ ] Part 10: Interview Questions
-
----
-
-## 📖 Core Concepts
-
-### What is Inheritance?
-
-**Definition:** Inheritance is a mechanism where a new class (derived/child) acquires properties and behaviors of an existing class (base/parent).
-
-```cpp
-class Animal {          // Base class
-    void eat() { }
-};
-
-class Dog : public Animal {  // Derived class
-    void bark() { }
+**Interview Tip:** If asked "How to prevent inheritance
 };
 
 // Dog inherits eat() from Animal
