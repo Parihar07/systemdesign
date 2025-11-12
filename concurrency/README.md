@@ -10,36 +10,80 @@ Understanding concurrency is critical for:
 
 ## Learning Path
 
-### Part 1: Process vs Thread Fundamentals
+### Part 1: Process vs Thread Fundamentals ✅
+📄 [01_process_vs_thread.cpp](01_process_vs_thread.cpp)
+
+**Topics Covered:**
 - Memory layout (stack, heap, code, data segments)
-- Context switching costs
+- Context switching costs and performance comparison
+- fork() vs std::thread
+- Global variable sharing vs isolation
 - When to use processes vs threads
 
-### Part 2: Thread Basics (std::thread)
-- Creating and managing threads
-- join() vs detach()
-- Thread lifecycle
-- Passing arguments to threads
+**Key Insights:**
+- Threads share code/data/heap, separate stacks
+- Thread context switch ~10x faster than process
+- Process isolation provides security, threads provide performance
 
-### Part 3: Synchronization Primitives
+---
+
+### Part 2: IPC & Process Internals ✅
+📄 [02_ipc_internals.cpp](02_ipc_internals.cpp)  
+📖 [03_process_internals_deep_dive.md](03_process_internals_deep_dive.md)
+
+**Topics Covered:**
+- Intra-process communication (threads - shared memory)
+- Inter-process communication (pipes, shared memory)
+- Performance comparison: atomic operations vs syscalls
+- TCB and PCB in kernel memory
+- Context switch mechanics (thread vs process)
+
+**Key Insights:**
+- Intra-process: 1-200 CPU cycles (direct memory access)
+- Inter-process: 1000-5000 cycles (syscall overhead)
+- TCB/PCB never swapped (always in kernel RAM)
+- Shared memory IPC fastest for processes
+
+---
+
+### Part 3: Thread Memory Layout ✅
+📄 [04_thread_memory_layout.cpp](04_thread_memory_layout.cpp)  
+📖 [05_thread_vs_process_memory.md](05_thread_vs_process_memory.md)
+
+**Topics Covered:**
+- Virtual address space layout
+- Stack independence (each thread has own 8MB stack)
+- Heap sharing among threads
+- Thread Local Storage (thread_local keyword)
+- Actual memory addresses demonstration
+
+**Key Insights:**
+- Threads don't have separate memory layouts like processes
+- All threads share ONE address space with separate stacks
+- Virtual addresses are just labels, physical RAM stores data
+- TLS provides per-thread variables without locking
+
+---
+
+### Part 4: Synchronization Primitives (Coming Soon)
 - std::mutex and lock_guard
 - std::condition_variable
 - std::atomic types
 - Memory ordering
 
-### Part 4: Common Concurrency Problems
+### Part 5: Common Concurrency Problems (Coming Soon)
 - Race conditions
 - Deadlocks
 - Starvation
 - Priority inversion
 
-### Part 5: Concurrency Patterns
+### Part 6: Concurrency Patterns (Coming Soon)
 - Thread pool
 - Producer-Consumer
 - Reader-Writer
 - Future/Promise
 
-### Part 6: Real-world Examples
+### Part 7: Real-world Examples (Coming Soon)
 - Multi-threaded server
 - Concurrent queue
 - Parallel task executor
@@ -53,9 +97,34 @@ make FILE=filename.cpp run
 g++ -std=c++17 -pthread filename.cpp -o program && ./program
 ```
 
-## Key Takeaways (will update as we progress)
-- Threads share memory → faster but need synchronization
-- Processes isolated → safer but higher overhead
-- Always protect shared data with locks
-- RAII for lock management (lock_guard, unique_lock)
-- Atomic operations for simple counters
+## Key Takeaways (Updated)
+
+### Process vs Thread
+- ✅ Threads share memory → faster but need synchronization
+- ✅ Processes isolated → safer but higher overhead
+- ✅ Thread context switch: ~1-2 μs vs Process: ~10-20 μs
+- ✅ TLB flush only needed for process switch
+
+### Memory & Communication
+- ✅ Threads share: heap, globals, code, file descriptors
+- ✅ Threads separate: stack (8MB each), CPU registers, TLS
+- ✅ Intra-process IPC: Direct memory access (1-200 cycles)
+- ✅ Inter-process IPC: Syscalls + copying (1000-5000 cycles)
+
+### Virtual Memory
+- ✅ Virtual addresses are labels/indexes, not storage
+- ✅ MMU translates virtual → physical addresses
+- ✅ Page tables map virtual to physical pages
+- ✅ Swap is overflow storage, not virtual memory itself
+
+### Kernel Structures
+- ✅ TCB (Thread Control Block) in kernel memory
+- ✅ PCB (Process Control Block) in kernel memory
+- ✅ Never swapped - needed for fast scheduling
+- ✅ ~1-2 KB per thread/process
+
+### Systems Programming Insights
+- ✅ Always protect shared data with locks
+- ✅ RAII for lock management (lock_guard, unique_lock)
+- ✅ Atomic operations for simple counters
+- ✅ Cache coherency matters on multi-core systems

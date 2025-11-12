@@ -166,12 +166,88 @@ Shared by all threads in process:
 
 ## Context Switch Details
 
+### Where TCB and PCB Live (CRITICAL!)
+
+**Both TCB and PCB are in KERNEL MEMORY, NOT in process address space!**
+
+```
+Physical RAM:
+┌────────────────────────────────────────┐
+│ Kernel Space (protected, always RAM)  │
+│  ├─ Kernel code                        │
+│  ├─ Kernel data structures             │
+│  │   ├─ PCB array ←─────────────────┐  │  One PCB per process
+│  │   │   └─ struct task_struct       │  │  (~1-2 KB each)
+│  │   └─ TCB array ←─────────────────┐│  │  Multiple TCBs per process
+│  │       └─ struct thread_struct     ││  │  (~1-2 KB each)
+│  ├─ Page tables                       ││  │
+│  └─ Scheduler                         ││  │
+├────────────────────────────────────────┤│  │
+│ User Space (can be swapped)           ││  │
+│  ├─ Process stack                     ││  │
+│  ├─ Process heap                      ││  │
+│  └─ Process code/data                 ││  │
+└────────────────────────────────────────┘│  │
+                                          │  │
+PCB/TCB NEVER swapped! ──────────────────┴──┘
+User memory CAN be swapped to disk.
+```
+
+**Why Kernel Memory?**
+1. **Fast Access**: Scheduler needs instant access during interrupts
+2. **Security**: User process can't corrupt scheduling metadata
+3. **Always Available**: Even if process is swapped out, PCB tracks where it is
+4. **Small Size**: ~1-2 KB per thread/process, manageable in RAM
+
+**PCB Hierarchy**:
+```
+PCB (Process Control Block) - in kernel memory
+  ├─ PID, parent PID, priority
+  ├─ Page table base (CR3 value)
+  ├─ Open file descriptors
+  ├─ Signal handlers
+  ├─ Memory limits
+  └─ Thread list
+      ├─ TCB for Thread 1 (CPU registers, stack pointer)
+      ├─ TCB for Thread 2 (CPU registers, stack pointer)
+      └─ TCB for Thread 3 (CPU registers, stack pointer)
+```
+
+**Interesting: Swapped Process**
+```
+Process swapped to disk, but PCB stays in kernel RAM:
+
+┌─────────────────────────────┐
+│ PCB in Kernel RAM           │ ← Still here!
+│  - PID: 1234                │
+│  - State: SWAPPED           │
+│  - Swap location: offset... │
+│  - Can be scheduled back in │
+└─────────────────────────────┘
+        │
+        ▼
+┌─────────────────────────────┐
+│ /dev/swap (disk)            │
+│  - Stack pages              │
+│  - Heap pages               │
+│  - Code pages               │
+└─────────────────────────────┘
+```
+
 ### Thread Context Switch (within same process)
 ```
-1. Save current thread registers to Thread Control Block (TCB)
-2. Load next thread registers from its TCB
-3. Update stack pointer (RSP) to new thread's stack
-4. Jump to new instruction pointer (RIP)
+1. Timer interrupt → CPU to kernel mode
+2. Kernel accesses current thread's TCB (in kernel memory)
+3. Save current thread registers to TCB:
+   TCB[thread_1].rax = CPU_rax;
+   TCB[thread_1].rsp = CPU_rsp;
+   TCB[thread_1].rip = CPU_rip;
+   // ... all registers
+4. Load next thread registers from its TCB:
+   CPU_rax = TCB[thread_2].rax;
+   CPU_rsp = TCB[thread_2].rsp;
+   CPU_rip = TCB[thread_2].rip;
+5. Jump to new thread (return to user mode)
 
 NO NEED TO:
 - Change page tables (CR3 unchanged)
@@ -183,13 +259,18 @@ Cost: ~1-2 microseconds
 
 ### Process Context Switch (between different processes)
 ```
-1. Save current process registers to Process Control Block (PCB)
-2. Load next process registers from its PCB
-3. Switch page tables (load CR3 with new page table base)
-4. Flush TLB (all cached virtual→physical translations invalid!)
-5. Update memory management unit (MMU)
-6. Switch process ID (PID)
-7. Jump to new instruction pointer
+1. Timer interrupt → CPU to kernel mode
+2. Kernel accesses current process's PCB (in kernel memory)
+3. Save current process registers to PCB:
+   PCB[process_1].registers = CPU_registers;
+4. Load next process registers from its PCB:
+   CPU_registers = PCB[process_2].registers;
+5. Switch page tables:
+   CR3 = PCB[process_2].page_table_base;
+6. Flush TLB (all cached virtual→physical translations invalid!)
+7. Update memory management unit (MMU)
+8. Switch process ID (PID)
+9. Jump to new process (return to user mode)
 
 Cost: ~10-20 microseconds (TLB flush is expensive!)
 ```
