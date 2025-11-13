@@ -6,7 +6,8 @@ CXXFLAGS = -std=c++17 -Wall -Wextra -pthread
 TARGET = program
 
 # Default file if not specified
-FILE ?= 01_process_vs_thread.cpp
+# Start with the simplest example by default
+FILE ?= 00_single_thread_basics.cpp
 
 all: build
 

@@ -8,7 +8,64 @@ Understanding concurrency is critical for:
 - Debugging race conditions and deadlocks
 - Efficient resource utilization
 
+## Basics (Definition + Syntax)
+
+### What is a Process?
+- Independent execution unit with its own virtual address space (code, data, heap, stack).
+- Isolated from other processes; switching processes changes the address space.
+
+Minimal syntax (create, exec, wait):
+```cpp
+#include <unistd.h>     // fork, execlp
+#include <sys/wait.h>   // waitpid
+
+int main() {
+	pid_t pid = fork();
+	if (pid == 0) {                 // child
+		execlp("ls", "ls", "-1", (char*)nullptr); // replace child image
+		_exit(127);                  // only if exec fails
+	}
+	int status = 0;
+	waitpid(pid, &status, 0);        // parent waits
+}
+```
+
+### What is a Thread?
+- Lightweight execution unit within a process; shares code/data/heap with other threads.
+- Each thread has its own stack and register state.
+
+Minimal syntax (create, join, detach):
+```cpp
+#include <thread>
+
+void work(int x) { /* do something */ }
+
+int main() {
+	std::thread t(work, 42); // start thread with function + arg
+	t.join();                 // wait for it to finish
+
+	std::thread d([]{ /* background */ });
+	d.detach();               // run independently (no join)
+}
+```
+
 ## Learning Path
+
+### Part 0: Single vs Multi-thread Basics ✅
+📄 [00_single_thread_basics.cpp](00_single_thread_basics.cpp)
+📄 [00_multi_thread_basics.cpp](00_multi_thread_basics.cpp)
+
+Focus: simple syntax, one concept per file.
+Compare a single-thread compute vs the same split across threads.
+Measure time; keep code readable and minimal.
+
+### Part 0.1: Quick Syntax – Thread & Process Creation ✅
+📄 [06_thread_create_basics.cpp](06_thread_create_basics.cpp)  
+📄 [07_process_create_basics.cpp](07_process_create_basics.cpp)
+
+Focus: minimal, readable syntax only.
+- Thread: start with function, lambda, passing args, join vs detach
+- Process: `fork()` child, `execlp("ls")`, `waitpid()` in parent
 
 ### Part 1: Process vs Thread Fundamentals ✅
 📄 [01_process_vs_thread.cpp](01_process_vs_thread.cpp)
