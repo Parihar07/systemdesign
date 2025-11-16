@@ -26,4 +26,55 @@
 - System design implications
 - File: `04_interview_questions.md`
 
+### Part 5: Hospital Management System (HMS)
+- **Complete interview problem demonstrating all 4 OOP relationships**
+- File: `hms.cpp`
+- Status: **Work in Progress** (Basic implementation complete)
+
 ---
+
+## 🏥 HMS Project - Current Implementation
+
+### What's Implemented:
+✅ **Inheritance (IS-A)**
+   - `Doctor` inherits from `Person`
+   - `Patient` inherits from `Person`
+   - Virtual destructor in base class
+
+✅ **Composition (Dies Together)**
+   - `Person` HAS `Address` (direct member)
+   - `Patient` HAS `MedicalRecord` (direct member)
+   - When Person/Patient dies, Address/MedicalRecord dies too
+
+✅ **Association (Temporary Relationship)**
+   - Doctor can access Patient via pointers
+   - `addPatient(Patient*)` demonstrates temporary relationship
+   - No ownership transfer
+
+⚠️ **Aggregation (Independent Lifetime)**
+   - Department stores `Doctor*` (raw pointers)
+   - Doctors can exist independently of Department
+   - **Note**: Using basic raw pointers for now
+
+### Current Approach:
+- **Using raw pointers** for simplicity and learning
+- **No smart pointers** (`shared_ptr`, `unique_ptr`) yet
+- Focus is on understanding OOP relationships first
+
+### Scope for Improvement:
+📝 **Future Enhancements** (After covering RAII & Smart Pointers):
+1. Replace `vector<Doctor*>` with `vector<shared_ptr<Doctor>>` (proper aggregation)
+2. Use `unique_ptr<MedicalRecord>` for composition (exclusive ownership)
+3. Add proper memory management and RAII principles
+4. Add `examine(Patient*)` method for clearer association
+5. Fix constructor parameter ordering
+6. Update UML diagram directions
+
+### Why This Approach?
+- **Learning path**: Master OOP relationships before memory management
+- **Interview focus**: Demonstrate understanding of concepts first
+- **Incremental improvement**: Add smart pointers after RAII topic
+- **Real-world scenario**: Many legacy codebases use raw pointers
+
+---
+
