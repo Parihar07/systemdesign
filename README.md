@@ -161,11 +161,11 @@ Demonstrating all 4 OOP relationships with real-world Hospital Management System
 
 ## 🏗️ Projects
 
-### [Hospital Management System (HMS)](./association/hms.cpp)
+### 1. [Hospital Management System (HMS)](./association/hms.cpp)
 **Weekend Interview Project** - Demonstrates all 4 OOP relationships
 - **Tech Stack**: C++17, raw pointers (pre-RAII)
 - **Concepts**: Inheritance, Composition, Aggregation, Association
-- **Status**: ✅ Complete and interview-ready
+- **Status**: ✅ Complete and interview-ready (Score: 9/10)
 - **Highlights**: 
   - Clean class hierarchy (Person → Doctor/Patient)
   - Proper composition (Address, MedicalRecord)
@@ -175,6 +175,24 @@ Demonstrating all 4 OOP relationships with real-world Hospital Management System
 - **Scope**: Basic implementation; future enhancement with RAII/smart pointers
 
 📖 [View HMS Code →](./association/hms.cpp) | [Read Documentation →](./association/README.md#-hms-project---current-implementation)
+
+---
+
+### 2. [Payment Service System](./projects/paymentsystem/)
+**Polymorphism & RAII Project** - Demonstrates virtual functions and smart pointers
+- **Tech Stack**: C++17, Smart Pointers (shared_ptr), RAII
+- **Concepts**: Polymorphism, Inheritance, Virtual Functions, Abstract Classes
+- **Status**: ✅ Complete and interview-ready (Score: 9.5/10)
+- **Highlights**:
+  - Abstract base class with pure virtual functions
+  - Multi-level inheritance (Pay → Card → CreditCard/DebitCard)
+  - Virtual destructor for proper cleanup
+  - Runtime polymorphism demonstration
+  - Smart pointers for automatic memory management
+  - Clean separation: UPI, Wallet, Card payment methods
+- **Key Learning**: Virtual functions, vtable mechanism, RAII principles
+
+📖 [View Payment Service Code →](./projects/paymentsystem/payment_system.cpp) | [Read Documentation →](./projects/paymentsystem/README.md)
 
 ---
 
@@ -231,6 +249,11 @@ systemdesign/
 │   ├── hms.cpp                 # Hospital Management System (Interview Project)
 │   ├── HMS.png                 # UML diagram
 │   └── makefile
+├── projects/                    # Interview Projects
+│   └── paymentsystem/          # Payment Service System
+│       ├── README.md           # Complete documentation
+│       ├── payment_system.cpp  # Polymorphism & RAII demo
+│       └── makefile
 ├── ProductService/              # Java Spring Boot project (for practice)
 └── backendproject/              # Other practice projects
 ```

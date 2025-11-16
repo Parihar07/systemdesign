@@ -6,7 +6,7 @@ using namespace std;
 /*
  * PART 6: VIRTUAL FUNCTIONS & POLYMORPHISM
  * =========================================
- * Deep dive into virtual functions and runtime polymorphism:
+ * Deep dive into virtual functions and runtime polmorphism:
  * - What is polymorphism?
  * - How virtual functions work (vtable/vptr)
  * - Pure virtual functions

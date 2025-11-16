@@ -40,6 +40,6 @@ class Doctor : public Person { /* specialization */ void examine(Patient&); };
 class Patient : public Person { MedicalRecord m_record; /* composition */ };
 class MedicalRecord { /* diagnosis */ };
 class Department { vector<shared_ptr<Doctor>> m_doctors; };
-```
+```.  
 
 Compile: `make FILE=your_file.cpp run`
