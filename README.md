@@ -161,38 +161,25 @@ Demonstrating all 4 OOP relationships with real-world Hospital Management System
 
 ## 🏗️ Projects
 
-### 1. [Hospital Management System (HMS)](./association/hms.cpp)
-**Weekend Interview Project** - Demonstrates all 4 OOP relationships
-- **Tech Stack**: C++17, raw pointers (pre-RAII)
-- **Concepts**: Inheritance, Composition, Aggregation, Association
-- **Status**: ✅ Complete and interview-ready (Score: 9/10)
-- **Highlights**: 
-  - Clean class hierarchy (Person → Doctor/Patient)
-  - Proper composition (Address, MedicalRecord)
-  - Aggregation with Department
-  - Association via examine() method
-  - Comprehensive comments and UML diagrams
-- **Scope**: Basic implementation; future enhancement with RAII/smart pointers
+**2 Complete Interview Projects** demonstrating different C++ concepts and design patterns.
 
-📖 [View HMS Code →](./association/hms.cpp) | [Read Documentation →](./association/README.md#-hms-project---current-implementation)
+📖 **[View All Projects →](./projects/)**
 
----
+### Quick Overview:
 
-### 2. [Payment Service System](./projects/paymentsystem/)
-**Polymorphism & RAII Project** - Demonstrates virtual functions and smart pointers
-- **Tech Stack**: C++17, Smart Pointers (shared_ptr), RAII
-- **Concepts**: Polymorphism, Inheritance, Virtual Functions, Abstract Classes
-- **Status**: ✅ Complete and interview-ready (Score: 9.5/10)
-- **Highlights**:
-  - Abstract base class with pure virtual functions
-  - Multi-level inheritance (Pay → Card → CreditCard/DebitCard)
-  - Virtual destructor for proper cleanup
-  - Runtime polymorphism demonstration
-  - Smart pointers for automatic memory management
-  - Clean separation: UPI, Wallet, Card payment methods
-- **Key Learning**: Virtual functions, vtable mechanism, RAII principles
+| Project | Focus | Tech | Score |
+|---------|-------|------|-------|
+| [HMS](./projects/HMS/) | All 4 OOP Relationships | Raw Pointers | 9/10 |
+| [Payment Service](./projects/paymentsystem/) | Polymorphism & RAII | Smart Pointers | 9.5/10 |
 
-📖 [View Payment Service Code →](./projects/paymentsystem/payment_system.cpp) | [Read Documentation →](./projects/paymentsystem/README.md)
+**Key Highlights:**
+- ✅ Interview-ready implementations with comprehensive documentation
+- ✅ UML diagrams and design explanations
+- ✅ Practice questions and talking points included
+- ✅ No compiler warnings, clean code quality
+- ✅ Makefile for easy compilation
+
+📖 [Explore Projects →](./projects/) | [See Comparison Table →](./projects/README.md#-project-comparison)
 
 ---
 
