@@ -101,6 +101,83 @@ Complete guide to class hierarchies, polymorphism, and runtime dispatch in C++.
 
 ---
 
+#### 4. [Concurrency Fundamentals](./concurrency/)
+Systems programming perspective on processes, threads, and memory management.
+
+**Covers:**
+- Process vs Thread (fundamental differences)
+- IPC mechanisms (pipes, shared memory, signals)
+- Memory layouts (stack, heap, TLS, code/data segments)
+- TCB/PCB in kernel memory
+- Thread creation basics (pthread, std::thread)
+- Process creation (fork, exec, wait)
+- Virtual memory and address translation
+- Context switching internals
+
+**Includes 9 Files:**
+- `00_single_thread_basics.cpp` - Single thread timing demo
+- `00_multi_thread_basics.cpp` - Work splitting with atomic
+- `01_process_vs_thread.cpp` - fork vs thread comparison
+- `02_ipc_internals.cpp` - IPC mechanisms demo
+- `03_process_internals_deep_dive.md` - TCB/PCB kernel details
+- `04_thread_memory_layout.cpp` - Stack/heap/TLS addresses
+- `05_thread_vs_process_memory.md` - Memory layout comparison
+- `06_thread_create_basics.cpp` - Simple thread syntax
+- `07_process_create_basics.cpp` - fork/exec/wait basics
+
+**Status:** Complete ✅ **Systems perspective!**
+
+📖 [Read the full guide →](./concurrency/README.md)
+
+---
+
+#### 5. [OOP Relationships](./association/)
+Demonstrating all 4 OOP relationships with real-world Hospital Management System.
+
+**Covers:**
+- **Inheritance (IS-A)**: Doctor/Patient inherit from Person
+- **Composition (Dies Together)**: Address in Person, MedicalRecord in Patient
+- **Aggregation (Independent)**: Department has Doctors
+- **Association (Temporary)**: Doctor examines Patient
+- UML diagrams and arrow directions
+- Memory management with raw pointers (pre-RAII)
+- Interview-ready implementation
+
+**Project:**
+- `hms.cpp` - Complete Hospital Management System
+  - Person base class with Address composition
+  - Doctor and Patient inheritance
+  - Department aggregation using pointers
+  - examine() method for association
+  - All 4 relationships demonstrated
+
+**Status:** Complete ✅ **Interview ready! Score: 9/10**
+
+**Note:** Using raw pointers for learning; will upgrade to smart_ptr after RAII topic.
+
+📖 [Read the full guide →](./association/README.md)
+
+---
+
+## 🏗️ Projects
+
+### [Hospital Management System (HMS)](./association/hms.cpp)
+**Weekend Interview Project** - Demonstrates all 4 OOP relationships
+- **Tech Stack**: C++17, raw pointers (pre-RAII)
+- **Concepts**: Inheritance, Composition, Aggregation, Association
+- **Status**: ✅ Complete and interview-ready
+- **Highlights**: 
+  - Clean class hierarchy (Person → Doctor/Patient)
+  - Proper composition (Address, MedicalRecord)
+  - Aggregation with Department
+  - Association via examine() method
+  - Comprehensive comments and UML diagrams
+- **Scope**: Basic implementation; future enhancement with RAII/smart pointers
+
+📖 [View HMS Code →](./association/hms.cpp) | [Read Documentation →](./association/README.md#-hms-project---current-implementation)
+
+---
+
 ## 🗂️ Repository Structure
 
 ```
@@ -137,9 +214,24 @@ systemdesign/
 │   ├── 10_private_inheritance_example.cpp
 │   ├── vptr_vtable_visual.cpp
 │   └── diamondprob.cpp
+├── concurrency/                 # Concurrency Fundamentals
+│   ├── README.md               # Systems programming perspective
+│   ├── 00_single_thread_basics.cpp
+│   ├── 00_multi_thread_basics.cpp
+│   ├── 01_process_vs_thread.cpp
+│   ├── 02_ipc_internals.cpp
+│   ├── 03_process_internals_deep_dive.md
+│   ├── 04_thread_memory_layout.cpp
+│   ├── 05_thread_vs_process_memory.md
+│   ├── 06_thread_create_basics.cpp
+│   ├── 07_process_create_basics.cpp
+│   └── makefile
+├── association/                 # OOP Relationships
+│   ├── README.md               # All 4 OOP relationships guide
+│   ├── hms.cpp                 # Hospital Management System (Interview Project)
+│   ├── HMS.png                 # UML diagram
+│   └── makefile
 ├── ProductService/              # Java Spring Boot project (for practice)
-└── backendproject/              # Other practice projects
-```
 └── backendproject/              # Other practice projects
 ```
 
@@ -188,6 +280,8 @@ Refer to individual README files for specific compilation instructions.
 - ✅ Access Modifiers (Complete)
 - ✅ Constructors & Destructors (Complete - All 8 parts done!)
 - ✅ Inheritance & Polymorphism (Complete - All 10 parts done!)
+- ✅ Concurrency Fundamentals (Complete - Systems perspective!)
+- ✅ OOP Relationships (Complete - HMS project!)
 - 🔜 Templates & Generic Programming
 - 🔜 RAII & Smart Pointers
 - 🔜 Move Semantics & Perfect Forwarding
@@ -240,9 +334,12 @@ This is a living resource that will grow over time. Topics will be added gradual
 - [x] Access Modifiers (public, protected, private, friend)
 - [x] Constructors & Destructors (All 8 parts)
 - [x] Inheritance & Polymorphism (All 10 parts + vptr/vtable deep dive)
+- [x] Concurrency Fundamentals (Processes, Threads, IPC, Memory Layouts)
+- [x] OOP Relationships (Inheritance, Composition, Aggregation, Association)
+- [x] **Project**: Hospital Management System (HMS)
 
-### � In Progress
-- [ ] Templates & Generic Programming
+### 🚧 In Progress
+- [ ] RAII & Smart Pointers
 
 ### 📋 Planned
 - [ ] RAII & Resource Management
@@ -317,5 +414,5 @@ This is an educational resource. Feel free to use, modify, and share for learnin
 
 **Happy Learning! 🚀**
 
-*Last Updated: October 2025*
+*Last Updated: November 16, 2025*
 *Topics will be added gradually as we progress through interview preparation.*
