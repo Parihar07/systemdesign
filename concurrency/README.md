@@ -103,6 +103,28 @@ Focus: minimal, readable syntax only.
 
 ---
 
+### Part 2.1: Pipe-based IPC (Hands-on) ✅
+📄 [02_ipc_pipe_basics.cpp](02_ipc_pipe_basics.cpp)
+
+**Topics Covered:**
+- Creating pipes with `pipe(pipefd[2])`
+- Fork-based process creation
+- Unidirectional communication (child → parent)
+- Closing unused pipe ends
+- Preventing zombie processes with `wait()`
+
+**Key Insights:**
+- `pipefd[0]` = read end, `pipefd[1]` = write end
+- Must close unused ends to prevent deadlocks
+- `read()` blocks until data available
+- Pipes are for parent-child or sibling processes only
+
+**🔗 Advanced Pipe Examples:**
+- [Bidirectional Chat System](../projects/systemprogramming/bidirection_comm/) - Two-way continuous communication
+- [Pipe Learning Guide](../projects/systemprogramming/PIPE_LEARNING_GUIDE.md) - Complete tutorial with deadlock scenarios
+
+---
+
 ### Part 3: Thread Memory Layout ✅
 📄 [04_thread_memory_layout.cpp](04_thread_memory_layout.cpp)  
 📖 [05_thread_vs_process_memory.md](05_thread_vs_process_memory.md)
@@ -145,6 +167,28 @@ Focus: minimal, readable syntax only.
 - Concurrent queue
 - Parallel task executor
 
+---
+
+## 🔬 Experimental Files
+
+### Thread Experiments
+📄 [thread_experiments.cpp](thread_experiments.cpp)
+- Exploring `join()` vs `detach()` behavior
+- Understanding why threads crash without join/detach
+- TCB lifecycle and std::terminate()
+
+### Process Experiments  
+📄 [process_exp.cpp](process_exp.cpp)
+- Understanding `fork()` memory cloning
+- Zombie and orphan process creation
+- PPID changes when parent dies
+- Process re-parenting to PID 1
+
+**🔗 Related Learning:**
+- See [Pipe Learning Guide](../projects/systemprogramming/PIPE_LEARNING_GUIDE.md) for complete IPC mastery
+
+---
+
 ## Compilation
 ```bash
 # Compile with thread support
@@ -168,6 +212,17 @@ g++ -std=c++17 -pthread filename.cpp -o program && ./program
 - ✅ Intra-process IPC: Direct memory access (1-200 cycles)
 - ✅ Inter-process IPC: Syscalls + copying (1000-5000 cycles)
 
+### Pipe IPC (Inter-Process Communication)
+- ✅ Unidirectional: One pipe for one-way communication
+- ✅ Bidirectional: Need TWO pipes (parent→child, child→parent)
+- ✅ `read()` blocks until data available (synchronization)
+- ✅ Close unused pipe ends to prevent deadlocks
+- ✅ Typical pipe buffer: ~64KB (check with `ulimit -p`)
+- ✅ Deadlock scenarios:
+  - ❌ Both processes `read()` first → circular wait
+  - ❌ Both `write()` huge data → buffer fills, both block
+  - ✅ Alternating write/read pattern → works!
+
 ### Virtual Memory
 - ✅ Virtual addresses are labels/indexes, not storage
 - ✅ MMU translates virtual → physical addresses
@@ -185,3 +240,50 @@ g++ -std=c++17 -pthread filename.cpp -o program && ./program
 - ✅ RAII for lock management (lock_guard, unique_lock)
 - ✅ Atomic operations for simple counters
 - ✅ Cache coherency matters on multi-core systems
+- ✅ `wait()` prevents zombie processes
+- ✅ Orphan processes adopted by PID 1 (init/systemd)
+
+---
+
+## 📚 Additional Resources
+
+### Project Examples
+- 🔗 [Bidirectional Pipe Chat](../projects/systemprogramming/bidirection_comm/) - Complete interactive parent-child communication
+- 🔗 [Pipe Learning Guide](../projects/systemprogramming/PIPE_LEARNING_GUIDE.md) - Comprehensive IPC tutorial with interview questions
+
+### Interview Preparation
+**Common Questions Covered:**
+1. ✅ Process vs Thread differences
+2. ✅ Context switching cost comparison
+3. ✅ Memory sharing in threads vs processes
+4. ✅ IPC mechanisms and performance
+5. ✅ Pipe deadlock scenarios
+6. ✅ Zombie and orphan processes
+7. ✅ When to use threads vs processes
+8. ✅ Virtual memory concepts
+
+**Hands-on Skills:**
+- Creating and managing processes with `fork()`
+- Threading with `std::thread` (join/detach)
+- Implementing pipe-based IPC (uni/bidirectional)
+- Preventing deadlocks through protocol design
+- Process cleanup with `wait()`
+- Understanding blocking I/O behavior
+
+---
+
+## 🎯 Learning Progress Tracker
+
+| Topic | Files | Status | Interview Ready |
+|-------|-------|--------|-----------------|
+| Single vs Multi-thread | 00_*.cpp | ✅ | ✅ |
+| Thread/Process Creation | 06, 07 | ✅ | ✅ |
+| Process vs Thread | 01 | ✅ | ✅ |
+| IPC Internals | 02 | ✅ | ✅ |
+| Pipe Basics | 02_ipc_pipe | ✅ | ✅ |
+| Bidirectional Pipes | [Projects](../projects/systemprogramming/bidirection_comm/) | ✅ | ✅ |
+| Memory Layout | 04, 05 | ✅ | ✅ |
+| Thread Experiments | thread_experiments | ✅ | ✅ |
+| Process Experiments | process_exp | ✅ | ✅ |
+| Synchronization | - | 🔄 Coming | ⏳ |
+| Concurrency Patterns | - | 🔄 Coming | ⏳ |
