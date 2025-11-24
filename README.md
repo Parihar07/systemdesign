@@ -185,7 +185,11 @@ Demonstrating all 4 OOP relationships with real-world Hospital Management System
 
 ## 🗂️ Repository Structure
 
-```
+├── functorsExecutioners/           # Function pointers, functors, lambdas
+│   ├── README.md                   # Index for function pointer & lambda topics
+│   ├── fp.cpp                      # Function pointer examples
+│   ├── lambda_explanation.cpp      # Lambda examples
+│   └── lambda_explanation.md       # Lambda explanations & guide
 systemdesign/
 ├── README.md                    # This file
 ├── acessmodifiers/              # Access modifiers topic
@@ -244,6 +248,13 @@ systemdesign/
 ├── ProductService/              # Java Spring Boot project (for practice)
 └── backendproject/              # Other practice projects
 ```
+### Function Pointers, Functors, and Lambdas
+
+Explore modern C++ callable objects, including:
+- Function pointers (basic, callback, arrays, strategy)
+- Lambdas (syntax, captures, STL, threading, generic, etc.)
+
+See [`functorsExecutioners/README.md`](./functorsExecutioners/README.md) for a full index and [`lambda_explanation.md`](./functorsExecutioners/lambda_explanation.md) for detailed lambda explanations and examples.
 
 ---
 

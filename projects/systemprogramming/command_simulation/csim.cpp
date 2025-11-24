@@ -49,7 +49,7 @@ int main()
 {
     cout << "Hello simulating shell command 'ls | wc -l'\n";
     cout << "Main program PID: " << getpid() << endl;
-    pid_t p1, p2;
+    int p1, p2;
 
     // Create ONE pipe: ls → wc (you only need one pipe for unidirectional flow)
     int pipefd[2];
