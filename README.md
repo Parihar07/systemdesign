@@ -185,11 +185,7 @@ Demonstrating all 4 OOP relationships with real-world Hospital Management System
 
 ## 🗂️ Repository Structure
 
-├── functorsExecutioners/           # Function pointers, functors, lambdas
-│   ├── README.md                   # Index for function pointer & lambda topics
-│   ├── fp.cpp                      # Function pointer examples
-│   ├── lambda_explanation.cpp      # Lambda examples
-│   └── lambda_explanation.md       # Lambda explanations & guide
+
 systemdesign/
 ├── README.md                    # This file
 ├── acessmodifiers/              # Access modifiers topic
@@ -240,6 +236,11 @@ systemdesign/
 │   ├── hms.cpp                 # Hospital Management System (Interview Project)
 │   ├── HMS.png                 # UML diagram
 │   └── makefile
+├── functorsExecutioners/           # Function pointers, functors, lambdas
+│   ├── README.md                   # Index for function pointer & lambda topics
+│   ├── fp.cpp                      # Function pointer examples
+│   ├── lambda_explanation.cpp      # Lambda examples
+│   └── lambda_explanation.md       # Lambda explanations & guide
 ├── projects/                    # Interview Projects
 │   └── paymentsystem/          # Payment Service System
 │       ├── README.md           # Complete documentation
