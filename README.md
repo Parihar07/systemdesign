@@ -1,4 +1,7 @@
 # System Design & C++ Interview Preparation
+![Status](https://img.shields.io/badge/Status-Active-success)
+![Focus](https://img.shields.io/badge/Focus-High_Performance_%26_Scalability-orange)
+![Language](https://img.shields.io/badge/Language-C%2B%2B_17%2F20-blue)
 
 A comprehensive resource for mastering **System Design**, **Object-Oriented Programming (OOP)**, and **C++ fundamentals** for technical interviews.
 
