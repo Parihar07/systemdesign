@@ -30,16 +30,18 @@ void producer(int id)
         data_queue.push(value);
         cv.notify_one();
     }
-    // Last producer signals shutdown
-    static int producers_done = 0;
-    if (++producers_done == NUM_PRODUCERS)
+    // Atomically update producer count and signal shutdown if all are done
     {
         lock_guard<mutex> lock(mtx);
-        finished_producing = true;
-        cv.notify_all();
+        static int producers_done = 0;
+        if (++producers_done == NUM_PRODUCERS)
+        {
+            cout << "Last producer (" << id << ") finished. Signaling all consumers to shutdown." << endl;
+            finished_producing = true;
+            cv.notify_all();
+        }
     }
 }
-
 void consumer(int id)
 {
     while (true)
