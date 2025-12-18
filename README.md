@@ -162,6 +162,23 @@ Demonstrating all 4 OOP relationships with real-world Hospital Management System
 
 ---
 
+#### 6. [Templates & Generics](./generics/)
+Intro to writing reusable, type-safe code with templates.
+
+**Covers (so far):**
+- What templates are and why they matter (generic, type-safe reuse)
+- Basic syntax for function and class templates
+
+**Includes 2 Examples:**
+- `genrics_basic.cpp` — function template `addnum`, class template `Box<T>`
+- `concepts_vs_sfinae.cpp` — SFINAE constraints (C++17 compilable) with C++20 concepts documented as theory
+
+📖 [Read the guide →](./generics/README.md) | ▶️ `cd generics && make FILE=genrics_basic.cpp run`
+
+**Next Up:** constraints (concepts), specialization, perfect forwarding/move-aware templates
+
+---
+
 ## 🏗️ Projects
 
 **2 Complete Interview Projects** demonstrating different C++ concepts and design patterns.
@@ -307,7 +324,7 @@ Refer to individual README files for specific compilation instructions.
 - ✅ Inheritance & Polymorphism (Complete - All 10 parts done!)
 - ✅ Concurrency Fundamentals (Complete - Systems perspective!)
 - ✅ OOP Relationships (Complete - HMS project!)
-- 🔜 Templates & Generic Programming
+- 🔜 Templates & Generic Programming (basics added)
 - 🔜 RAII & Smart Pointers
 - 🔜 Move Semantics & Perfect Forwarding
 - 🔜 Design Patterns
@@ -364,6 +381,7 @@ This is a living resource that will grow over time. Topics will be added gradual
 - [x] **Project**: Hospital Management System (HMS)
 
 ### 🚧 In Progress
+- [ ] Templates & Generics (basics done; concepts/specialization next)
 - [ ] RAII & Smart Pointers
 
 ### 📋 Planned
