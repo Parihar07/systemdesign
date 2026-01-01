@@ -1,9 +1,17 @@
+// Example focus:
+// 1) Show the std::exception class hierarchy split into logic_error vs runtime_error families.
+// 2) Demonstrate catching specific derived types first, then their base classes, then std::exception.
+// 3) Emphasize handler ordering: most specific before general to avoid premature catches.
 #include <iostream>
 #include <stdexcept>
 
+// Throws from the logic_error branch (deterministic, precondition-style issues).
 void logic_demo() { throw std::domain_error("Domain error: invalid input domain"); }
+
+// Throws from the runtime_error branch (environment/runtime conditions).
 void runtime_demo() { throw std::runtime_error("Runtime error: failed operation"); }
 
+// Drives the hierarchy demo and catch ordering.
 int main()
 {
     std::cout << "-- std::exception hierarchy --\n";

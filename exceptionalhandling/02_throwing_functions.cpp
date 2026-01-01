@@ -1,3 +1,8 @@
+// Example focus:
+// 1) Wrap lower-level parse errors with actionable context (which input failed and why).
+// 2) Ensure parsing consumes the whole string; trailing characters are treated as errors.
+// 3) Use catch-all + `throw;` to log locally while preserving the original exception type/message.
+// 4) Show caller-side catches receiving enriched messages from both direct throws and rethrows.
 #include <iostream>
 #include <stdexcept>
 #include <string>
@@ -26,6 +31,7 @@ int parse_int(const std::string &s)
     return value;
 }
 
+// Demonstrates logging-and-rethrow while preserving the original exception type/message.
 void demo_rethrow()
 {
     try
@@ -39,6 +45,7 @@ void demo_rethrow()
     }
 }
 
+// Drives the demo: shows wrapped parse errors and preserved rethrow behavior.
 int main()
 {
     std::cout << "-- Exceptions from functions & rethrow --\n";

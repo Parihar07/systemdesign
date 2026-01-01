@@ -2,6 +2,7 @@
 #include <memory>
 #include <stdexcept>
 
+// Utility that logs when it is created/destroyed so we can see unwinding order.
 struct Tracer
 {
     const char *name;
@@ -11,17 +12,19 @@ struct Tracer
 
 void work()
 {
-    Tracer a{"A"};
-    std::unique_ptr<int> p(new int(42)); // RAII
-    Tracer b{"B"};
+    Tracer a{"A"};                       // first object on the stack
+    std::unique_ptr<int> p(new int(42)); // heap resource managed via RAII
+    Tracer b{"B"};                       // second object on the stack
     std::cout << "About to throw...\n";
-    throw std::runtime_error("boom");
-    Tracer c{"C"}; // not executed
+    throw std::runtime_error("boom"); // trigger unwinding; everything above is cleaned
+    Tracer c{"C"};                    // not executed because of the throw
 }
 
 int main()
 {
     std::cout << "-- Stack unwinding & RAII --\n";
+    // Goal: show that local objects and RAII-managed resources are destroyed in reverse
+    // order when an exception propagates (stack unwinding).
     try
     {
         work();

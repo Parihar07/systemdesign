@@ -38,7 +38,7 @@ Complete guide to C++ access control mechanisms.
 
 ---
 
-#### 2. [Constructors & Destructors](./constructors/)
+#### 2. [Constructors & Destructors](./constructors-destructors/)
 Deep dive into object lifecycle management in C++.
 
 **Covers:**
@@ -55,11 +55,12 @@ Deep dive into object lifecycle management in C++.
 - `01_basic_constructor.cpp` - Constructor fundamentals
 - `02_parameterized_constructor.cpp` - Controlled object creation
 - `03_copy_constructor.cpp` - Shallow vs Deep copy explained
- - `04_constructor_overloading.cpp` - Function overloading with 4 examples
+- `04_constructor_overloading.cpp` - Function overloading with 4 examples
 - `05_initialization_list.cpp` - Performance optimization
 - `06_destructor_basics.cpp` - Resource cleanup & RAII
 - `07_constructor_destructor_order.cpp` - Inheritance order & virtual destructors
 - `08_special_cases.cpp` - Explicit, Singleton, Factory patterns
+- `explicit_explained.cpp` - `explicit` keyword deep dive
 - `cnstrs.cpp` - Working example with Rule of Three
 
 **Status:** Parts 1-8 complete ✅ **CORE TOPICS DONE!**
@@ -117,16 +118,19 @@ Systems programming perspective on processes, threads, and memory management.
 - Virtual memory and address translation
 - Context switching internals
 
-**Includes 9 Files:**
+**Includes 12 Files:**
 - `00_single_thread_basics.cpp` - Single thread timing demo
 - `00_multi_thread_basics.cpp` - Work splitting with atomic
 - `01_process_vs_thread.cpp` - fork vs thread comparison
 - `02_ipc_internals.cpp` - IPC mechanisms demo
+- `02_ipc_pipe_basics.cpp` - Pipe-based IPC basics
 - `03_process_internals_deep_dive.md` - TCB/PCB kernel details
 - `04_thread_memory_layout.cpp` - Stack/heap/TLS addresses
 - `05_thread_vs_process_memory.md` - Memory layout comparison
 - `06_thread_create_basics.cpp` - Simple thread syntax
 - `07_process_create_basics.cpp` - fork/exec/wait basics
+- `process_exp.cpp` - Process creation experiment
+- `thread_experiments.cpp` - Threading experiments playground
 
 **Status:** Complete ✅ **Systems perspective!**
 
@@ -179,9 +183,46 @@ Intro to writing reusable, type-safe code with templates.
 
 ---
 
+#### 7. [Exception Handling](./exceptionalhandling/)
+Practical exception-safety patterns with working samples.
+
+**Covers:**
+- try/catch basics and throwing functions
+- Standard exception hierarchy and custom exceptions
+- RAII stack unwinding
+- Exception safety guarantees and `noexcept`
+- Futures, nested exceptions, and error codes
+
+**Includes:**
+- `01_try_catch_basics.cpp` through `10_error_code_vs_exception.cpp`
+- `experiments.cpp` - sandbox for patterns
+
+📖 [Read the guide →](./exceptionalhandling/README.md)
+
+---
+
+#### 8. [Synchronization](./synchronization/)
+Thread-safety primitives and patterns.
+
+**Covers:**
+- Mutexes and shared mutexes
+- Semaphores (native and C++20)
+- Classic producer-consumer patterns
+- Traffic counter example
+
+**Includes:**
+- `sync_mutex.cpp`, `sync_shared_mutex.cpp`
+- `semaphore_native.cpp`, `semaphore_cpp20.cpp`
+- `producer_consumer.cpp`, `producer_consumer_advanced.cpp`
+- `traffic_counter.cpp`
+
+📖 [Read the guide →](./synchronization/README.md)
+
+---
+
 ## 🏗️ Projects
 
-**2 Complete Interview Projects** demonstrating different C++ concepts and design patterns.
+Project suites demonstrating different C++ concepts and design patterns.
 
 📖 **[View All Projects →](./projects/)**
 
@@ -191,6 +232,7 @@ Intro to writing reusable, type-safe code with templates.
 |---------|-------|------|-------|
 | [HMS](./projects/HMS/) | All 4 OOP Relationships | Raw Pointers | 9/10 |
 | [Payment Service](./projects/paymentsystem/) | Polymorphism & RAII | Smart Pointers | 9.5/10 |
+| [System Programming (WIP)](./projects/systemprogramming/) | Unix process/thread exercises | C/C++ | WIP |
 
 **Key Highlights:**
 - ✅ Interview-ready implementations with comprehensive documentation
@@ -205,69 +247,65 @@ Intro to writing reusable, type-safe code with templates.
 
 ## 🗂️ Repository Structure
 
-
+```
 systemdesign/
-├── README.md                    # This file
-├── acessmodifiers/              # Access modifiers topic
-│   ├── README.md               # Comprehensive guide
-│   ├── example1/               # Basic examples
-│   ├── example2/               # Protected rules
-│   ├── example3/               # Real-world scenarios
-│   └── example4/               # Inheritance types
-├── constructors-destructors/    # Constructors & Destructors
-│   ├── README.md               # Complete roadmap
-│   ├── 01_basic_constructor.cpp
-│   ├── 02_parameterized_constructor.cpp
-│   ├── 03_copy_constructor.cpp
-│   ├── 04_constructor_overloading.cpp
-│   ├── 05_initialization_list.cpp
-│   ├── 06_destructor_basics.cpp
-│   ├── 07_constructor_destructor_order.cpp
-│   ├── 08_special_cases.cpp
-│   └── cnstrs.cpp              # Working example
-├── inheritance/                 # Inheritance & Polymorphism
-│   ├── README.md               # Complete roadmap with navigation
-│   ├── 01_inheritance_basics.cpp
-│   ├── 02_types_of_inheritance.cpp
-│   ├── 03_access_control.cpp
-│   ├── 04_constructor_destructor_order.cpp
-│   ├── 05_function_overriding.cpp
-│   ├── 06_virtual_functions.cpp
-│   ├── 07_abstract_classes.cpp
-│   ├── 08_multiple_inheritance.cpp
-│   ├── 09_real_world_example.cpp
-│   ├── 10_private_inheritance_example.cpp
+├── README.md
+├── acessmodifiers/
+│   ├── README.md
+│   ├── example1/
+│   ├── example2/
+│   ├── example3/
+│   └── example4/
+├── association/
+│   ├── README.md
+│   ├── PROBLEM_STATEMENT.md
+│   ├── 01_association_basics.cpp ... 06_complete_example.cpp
+│   ├── hms.cpp
+│   └── makefile
+├── concurrency/
+│   ├── README.md
+│   ├── 00_single_thread_basics.cpp ... 07_process_create_basics.cpp
+│   ├── 02_ipc_pipe_basics.cpp
+│   ├── process_exp.cpp
+│   ├── thread_experiments.cpp
+│   └── makefile
+├── constructors-destructors/
+│   ├── README.md
+│   ├── 01_basic_constructor.cpp ... 08_special_cases.cpp
+│   ├── explicit_explained.cpp
+│   └── cnstrs.cpp
+├── exceptionalhandling/
+│   ├── README.md
+│   ├── 01_try_catch_basics.cpp ... 10_error_code_vs_exception.cpp
+│   ├── experiments.cpp
+│   └── makefile
+├── functorsExecutioners/
+│   ├── README.md
+│   ├── fp.cpp
+│   ├── lambda_explanation.cpp
+│   ├── lambda_explanation.md
+│   └── makefile
+├── generics/
+│   ├── README.md
+│   ├── genrics_basic.cpp
+│   ├── concepts_vs_sfinae.cpp
+│   └── makefile
+├── inheritance/
+│   ├── README.md
+│   ├── 01_inheritance_basics.cpp ... 10_private_inheritance_example.cpp
 │   ├── vptr_vtable_visual.cpp
 │   └── diamondprob.cpp
-├── concurrency/                 # Concurrency Fundamentals
-│   ├── README.md               # Systems programming perspective
-│   ├── 00_single_thread_basics.cpp
-│   ├── 00_multi_thread_basics.cpp
-│   ├── 01_process_vs_thread.cpp
-│   ├── 02_ipc_internals.cpp
-│   ├── 03_process_internals_deep_dive.md
-│   ├── 04_thread_memory_layout.cpp
-│   ├── 05_thread_vs_process_memory.md
-│   ├── 06_thread_create_basics.cpp
-│   ├── 07_process_create_basics.cpp
-│   └── makefile
-├── association/                 # OOP Relationships
-│   ├── README.md               # All 4 OOP relationships guide
-│   ├── hms.cpp                 # Hospital Management System (Interview Project)
-│   ├── HMS.png                 # UML diagram
-│   └── makefile
-├── functorsExecutioners/           # Function pointers, functors, lambdas
-│   ├── README.md                   # Index for function pointer & lambda topics
-│   ├── fp.cpp                      # Function pointer examples
-│   ├── lambda_explanation.cpp      # Lambda examples
-│   └── lambda_explanation.md       # Lambda explanations & guide
-├── projects/                    # Interview Projects
-│   └── paymentsystem/          # Payment Service System
-│       ├── README.md           # Complete documentation
-│       ├── payment_system.cpp  # Polymorphism & RAII demo
-│       └── makefile
-├── ProductService/              # Java Spring Boot project (for practice)
-└── backendproject/              # Other practice projects
+├── projects/
+│   ├── README.md
+│   ├── HMS/
+│   ├── paymentsystem/
+│   └── systemprogramming/
+└── synchronization/
+    ├── README.md
+    ├── sync_mutex.cpp, sync_shared_mutex.cpp
+    ├── semaphore_native.cpp, semaphore_cpp20.cpp
+    ├── producer_consumer.cpp, producer_consumer_advanced.cpp
+    └── traffic_counter.cpp
 ```
 ### Function Pointers, Functors, and Lambdas
 
@@ -301,7 +339,7 @@ g++ -o am.out am.cpp
 ./am.out
 
 # Or for constructors
-cd constructors
+cd constructors-destructors
 g++ -o basic.out 01_basic_constructor.cpp
 ./basic.out
 ```
@@ -379,18 +417,18 @@ This is a living resource that will grow over time. Topics will be added gradual
 - [x] Concurrency Fundamentals (Processes, Threads, IPC, Memory Layouts)
 - [x] OOP Relationships (Inheritance, Composition, Aggregation, Association)
 - [x] **Project**: Hospital Management System (HMS)
+- [x] Exception Handling (safety levels, `noexcept`, futures, error codes)
+- [x] Synchronization Primitives (mutexes, semaphores, producer-consumer)
 
 ### 🚧 In Progress
 - [ ] Templates & Generics (basics done; concepts/specialization next)
 - [ ] RAII & Smart Pointers
+- [ ] System Programming project enhancements
 
 ### 📋 Planned
-- [ ] RAII & Resource Management
-- [ ] Smart Pointers (unique_ptr, shared_ptr, weak_ptr)
 - [ ] Move Semantics & Perfect Forwarding
 - [ ] STL Containers & Algorithms
 - [ ] Design Patterns (Gang of Four)
-- [ ] Exception Handling
 - [ ] Memory Management
 - [ ] Concurrency & Threading
 - [ ] System Design Case Studies
@@ -412,13 +450,6 @@ This is a living resource that will grow over time. Topics will be added gradual
 - Start with a simple solution, then optimize
 - Discuss edge cases and error handling
 - Know the time/space complexity
-
----
-
-## 🔗 Related Projects
-
-- **ProductService/**: Java Spring Boot service (for backend practice)
-- **backendproject/**: Additional backend examples
 
 ---
 
@@ -457,5 +488,5 @@ This is an educational resource. Feel free to use, modify, and share for learnin
 
 **Happy Learning! 🚀**
 
-*Last Updated: November 16, 2025*
+*Last Updated: December 30, 2025*
 *Topics will be added gradually as we progress through interview preparation.*
