@@ -138,7 +138,37 @@ Systems programming perspective on processes, threads, and memory management.
 
 ---
 
-#### 5. [OOP Relationships](./association/)
+#### 5. [SOLID Principles](./solid/) ⭐ **NEW!**
+Complete deep-dive into SOLID design principles with interview preparation materials.
+
+**Covers:**
+- **S**ingle Responsibility Principle - One class, one job
+- **O**pen/Closed Principle - Open for extension, closed for modification
+- **L**iskov Substitution Principle - Subtypes must be substitutable
+- **I**nterface Segregation Principle - Small focused interfaces
+- **D**ependency Inversion Principle - Depend on abstractions
+
+**Includes 6 Complete Examples:**
+- `01_srp_single_responsibility.cpp` - Employee, User, Invoice systems
+- `02_ocp_open_closed.cpp` - Shapes, Payments, Notifications
+- `03_lsp_liskov_substitution.cpp` - Rectangle/Square, Birds, Accounts
+- `04_isp_interface_segregation.cpp` - Workers, Printers, Databases  
+- `05_dip_dependency_inversion.cpp` - Dependency injection patterns
+- `06_real_world_ecommerce.cpp` - Complete e-commerce system with all SOLID
+
+**Interview Resources:**
+- `CHEAT_SHEET.md` - Quick reference for interviews
+- `INTERVIEW_GUIDE.md` - Deep interview preparation
+- `STUDY_PLAN.md` - 30-min to 1-week study plans
+- Each file has BAD vs GOOD examples with explanations
+
+**Status:** Complete ✅ **Interview-ready!**
+
+📖 [Read the full guide →](./solid/README.md)
+
+---
+
+#### 6. [OOP Relationships](./association/)
 Demonstrating all 4 OOP relationships with real-world Hospital Management System.
 
 **Covers:**
